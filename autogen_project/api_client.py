@@ -200,9 +200,4 @@ if __name__ == "__main__":
     # Example 2: Sales data analysis
     print("\n2️⃣ Sales Data Analysis:")
     result2 = call_sales_data_analyst_api()
-    
-    # Example 3: Multi-file analysis
-    print("\n3️⃣ Multi-File Analysis:")
-    result3 = call_multi_file_analysis_api()
-    
     print("\n🎉 API Testing Complete!")

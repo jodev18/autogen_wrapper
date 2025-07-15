@@ -259,52 +259,52 @@ async def list_agent_types():
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.post("/create-custom-agent")
-async def create_custom_agent(
-    name: str,
-    template_name: str,
-    system_message: str,
-    provider: Optional[str] = None,
-    model_name: Optional[str] = None
-):
-    """Create and register a custom agent.
+# @app.post("/create-custom-agent")
+# async def create_custom_agent(
+#     name: str,
+#     template_name: str,
+#     system_message: str,
+#     provider: Optional[str] = None,
+#     model_name: Optional[str] = None
+# ):
+#     """Create and register a custom agent.
     
-    Args:
-        name: Agent name.
-        template_name: Template file name.
-        system_message: System message for the agent.
-        provider: LLM provider.
-        model_name: Specific model to use.
+#     Args:
+#         name: Agent name.
+#         template_name: Template file name.
+#         system_message: System message for the agent.
+#         provider: LLM provider.
+#         model_name: Specific model to use.
         
-    Returns:
-        Agent creation result.
-    """
-    try:
-        from agents import AgentFactory, CustomAgent
+#     Returns:
+#         Agent creation result.
+#     """
+#     try:
+#         from agents import AgentFactory, CustomAgent
         
-        # Create custom agent class
-        class DynamicCustomAgent(CustomAgent):
-            def __init__(self, provider=None):
-                super().__init__(
-                    name=name,
-                    template_name=template_name,
-                    system_message=system_message,
-                    provider=provider,
-                    model_name=model_name
-                )
+#         # Create custom agent class
+#         class DynamicCustomAgent(CustomAgent):
+#             def __init__(self, provider=None):
+#                 super().__init__(
+#                     name=name,
+#                     template_name=template_name,
+#                     system_message=system_message,
+#                     provider=provider,
+#                     model_name=model_name
+#                 )
         
-        # Register with orchestrator
-        orchestrator.register_agent(name.lower().replace(" ", "_"), DynamicCustomAgent)
+#         # Register with orchestrator
+#         orchestrator.register_agent(name.lower().replace(" ", "_"), DynamicCustomAgent)
         
-        return {
-            "success": True,
-            "message": f"Custom agent '{name}' created and registered",
-            "agent_name": name.lower().replace(" ", "_")
-        }
+#         return {
+#             "success": True,
+#             "message": f"Custom agent '{name}' created and registered",
+#             "agent_name": name.lower().replace(" ", "_")
+#         }
         
-    except Exception as e:
-        orchestrator_logger.error(f"API error creating custom agent '{name}'", {"error": str(e)})
-        raise HTTPException(status_code=500, detail=str(e))
+#     except Exception as e:
+#         orchestrator_logger.error(f"API error creating custom agent '{name}'", {"error": str(e)})
+#         raise HTTPException(status_code=500, detail=str(e))
 
 
 @app.get("/health")
